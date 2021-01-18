@@ -1,4 +1,4 @@
-//импорт из стандартной библиотеки, так же можно использовать java.util.*;
+//РёРјРїРѕСЂС‚ РёР· СЃС‚Р°РЅРґР°СЂС‚РЅРѕР№ Р±РёР±Р»РёРѕС‚РµРєРё, С‚Р°Рє Р¶Рµ РјРѕР¶РЅРѕ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ java.util.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,12 +7,12 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class KresticiNoliki {
-// Два листа для сохранения позиций игрока и компъютера.
+// Р”РІР° Р»РёСЃС‚Р° РґР»СЏ СЃРѕС…СЂР°РЅРµРЅРёСЏ РїРѕР·РёС†РёР№ РёРіСЂРѕРєР° Рё РєРѕРјРїСЉСЋС‚РµСЂР°.
 	static ArrayList<Integer> playerPositions = new ArrayList<Integer>();
 	static ArrayList<Integer> cpuPositions = new ArrayList<Integer>();
 
 	public static void main(String[] args) {
-		//массив чаров - игровое поле
+		//РјР°СЃСЃРёРІ С‡Р°СЂРѕРІ - РёРіСЂРѕРІРѕРµ РїРѕР»Рµ
 		char[][] gameBoard = { 	{ ' ', '|', ' ', '|', ' ' }, 
 								{ '-', '+', '-', '+', '-' },
 								{ ' ', '|', ' ', '|', ' ' },
@@ -21,40 +21,40 @@ public class KresticiNoliki {
 
 		printGameBoard(gameBoard);
 
-		//запускается игровой цикл
+		//Р·Р°РїСѓСЃРєР°РµС‚СЃСЏ РёРіСЂРѕРІРѕР№ С†РёРєР»
 		while (true) {
 			Scanner scan = new Scanner(System.in);
 			System.out.println("Vvedi chislo ot 1 do 9/enter a number from 1 to 9");
 			int playerPos = scan.nextInt();
-			//проверяем не занята ли клетка
+			//РїСЂРѕРІРµСЂСЏРµРј РЅРµ Р·Р°РЅСЏС‚Р° Р»Рё РєР»РµС‚РєР°
 			while (playerPositions.contains(playerPos) || cpuPositions.contains(playerPos)) {
 				System.out.println("Kletka zanyata, vybery druguyu!/cell is busy choose another :)");
 				playerPos = scan.nextInt();
 			}
 			placePiece(gameBoard, playerPos, "player");
-			//проверяем есть ли победитель
+			//РїСЂРѕРІРµСЂСЏРµРј РµСЃС‚СЊ Р»Рё РїРѕР±РµРґРёС‚РµР»СЊ
 			String result = checkWinner();
-			//останавливаем игру если победитель найден
+			//РѕСЃС‚Р°РЅР°РІР»РёРІР°РµРј РёРіСЂСѓ РµСЃР»Рё РїРѕР±РµРґРёС‚РµР»СЊ РЅР°Р№РґРµРЅ
 			if (result.length() > 0) {
 				System.out.println(result);
 				printGameBoard(gameBoard);
 				break;
 			}
-			//ход компъютера
+			//С…РѕРґ РєРѕРјРїСЉСЋС‚РµСЂР°
 			Random rand = new Random();
 			int cpuPos = rand.nextInt(9) + 1;
-			//проверяем что бы цпу не выбрал такую же клетку что и пользователь
-			//если цпу выбрал ту же клетку запускаем цикл выбора свободной клетки
+			//РїСЂРѕРІРµСЂСЏРµРј С‡С‚Рѕ Р±С‹ С†РїСѓ РЅРµ РІС‹Р±СЂР°Р» С‚Р°РєСѓСЋ Р¶Рµ РєР»РµС‚РєСѓ С‡С‚Рѕ Рё РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ
+			//РµСЃР»Рё С†РїСѓ РІС‹Р±СЂР°Р» С‚Сѓ Р¶Рµ РєР»РµС‚РєСѓ Р·Р°РїСѓСЃРєР°РµРј С†РёРєР» РІС‹Р±РѕСЂР° СЃРІРѕР±РѕРґРЅРѕР№ РєР»РµС‚РєРё
 			while (playerPositions.contains(cpuPos) || cpuPositions.contains(cpuPos)) {
 
 				cpuPos = rand.nextInt(9) + 1;
 			}
 			placePiece(gameBoard, cpuPos, "cpu");
-			//выводим в консоль игровое поле после хода игроков
+			//РІС‹РІРѕРґРёРј РІ РєРѕРЅСЃРѕР»СЊ РёРіСЂРѕРІРѕРµ РїРѕР»Рµ РїРѕСЃР»Рµ С…РѕРґР° РёРіСЂРѕРєРѕРІ
 			printGameBoard(gameBoard);
-			//проверяем есть ли победитель
+			//РїСЂРѕРІРµСЂСЏРµРј РµСЃС‚СЊ Р»Рё РїРѕР±РµРґРёС‚РµР»СЊ
 			result = checkWinner();
-			//останавливаем игру если победитель найден
+			//РѕСЃС‚Р°РЅР°РІР»РёРІР°РµРј РёРіСЂСѓ РµСЃР»Рё РїРѕР±РµРґРёС‚РµР»СЊ РЅР°Р№РґРµРЅ
 			if (result.length() > 0) {
 				System.out.println(result);
 				printGameBoard(gameBoard);
@@ -65,7 +65,7 @@ public class KresticiNoliki {
 
 	}
 
-	//метод выводит в консоль игровое поле 
+	//РјРµС‚РѕРґ РІС‹РІРѕРґРёС‚ РІ РєРѕРЅСЃРѕР»СЊ РёРіСЂРѕРІРѕРµ РїРѕР»Рµ 
 	public static void printGameBoard(char[][] gameBoard) {
 		for (char[] row : gameBoard) {
 			for (char c : row) {
@@ -75,7 +75,7 @@ public class KresticiNoliki {
 		}
 	}
 
-	//метод вставляет вместо пробелов крестики и нолики, добавляет использованную ячейку в лист сохранения позиций из 9 и 10 строки
+	//РјРµС‚РѕРґ РІСЃС‚Р°РІР»СЏРµС‚ РІРјРµСЃС‚Рѕ РїСЂРѕР±РµР»РѕРІ РєСЂРµСЃС‚РёРєРё Рё РЅРѕР»РёРєРё, РґРѕР±Р°РІР»СЏРµС‚ РёСЃРїРѕР»СЊР·РѕРІР°РЅРЅСѓСЋ СЏС‡РµР№РєСѓ РІ Р»РёСЃС‚ СЃРѕС…СЂР°РЅРµРЅРёСЏ РїРѕР·РёС†РёР№ РёР· 9 Рё 10 СЃС‚СЂРѕРєРё
 	public static void placePiece(char[][] gameBoard, int pos, String user) {
 
 		char symbol = ' ';
@@ -88,7 +88,7 @@ public class KresticiNoliki {
 			cpuPositions.add(pos);
 		}
 		
-		//меняем в игровом поле пробелы на Х или О
+		//РјРµРЅСЏРµРј РІ РёРіСЂРѕРІРѕРј РїРѕР»Рµ РїСЂРѕР±РµР»С‹ РЅР° РҐ РёР»Рё Рћ
 		switch (pos) {
 		case 1:
 			gameBoard[0][0] = symbol;
@@ -122,9 +122,9 @@ public class KresticiNoliki {
 		}
 	}
 	
-	//метод проверки победителя
+	//РјРµС‚РѕРґ РїСЂРѕРІРµСЂРєРё РїРѕР±РµРґРёС‚РµР»СЏ
 	public static String checkWinner() {
-		//победные позиции
+		//РїРѕР±РµРґРЅС‹Рµ РїРѕР·РёС†РёРё
 		List topRow = Arrays.asList(1, 2, 3);
 		List midRow = Arrays.asList(4, 5, 6);
 		List botRow = Arrays.asList(7, 8, 9);
@@ -133,7 +133,7 @@ public class KresticiNoliki {
 		List rightCol = Arrays.asList(3, 6, 9);
 		List cross1 = Arrays.asList(1, 5, 9);
 		List cross2 = Arrays.asList(3, 5, 7);
-		//лист с победными позициями
+		//Р»РёСЃС‚ СЃ РїРѕР±РµРґРЅС‹РјРё РїРѕР·РёС†РёСЏРјРё
 		List<List> winning = new ArrayList<List>();
 		winning.add(topRow);
 		winning.add(midRow);
@@ -143,7 +143,7 @@ public class KresticiNoliki {
 		winning.add(rightCol);
 		winning.add(cross1);
 		winning.add(cross2);
-		//проверяем содератся ли наши массивы в победных позициях 
+		//РїСЂРѕРІРµСЂСЏРµРј СЃРѕРґРµСЂР°С‚СЃСЏ Р»Рё РЅР°С€Рё РјР°СЃСЃРёРІС‹ РІ РїРѕР±РµРґРЅС‹С… РїРѕР·РёС†РёСЏС… 
 		for (List l : winning) {
 			if (playerPositions.containsAll(l)) {
 				return "Ty pobedil!/You win!";
