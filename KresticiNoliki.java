@@ -151,6 +151,8 @@ public class KresticiNoliki {
 				return "Ty proigral!/You lose!";
 			} else if (playerPositions.size() + cpuPositions.size() == 9) {
 				return "Nich'a / Draw in the game";
+			} else if (playerPositions.containsAll(l) && cpuPositions.containsAll(l)) {
+				return "Nich'a / Draw in the game";
 			}
 
 		}
